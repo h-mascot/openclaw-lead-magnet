@@ -397,6 +397,18 @@
       font-size: 13px;
     }
 
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
     .download-box {
       display: none;
       padding: 16px;
@@ -537,6 +549,11 @@
           <form id="lead-form" class="lead-form" action="/api/lead" method="POST">
             <input type="hidden" name="_subject" value="OpenClaw lead magnet download">
             <input type="hidden" name="source" value="openclaw-guide-lead-magnet">
+            <input id="loaded-at" type="hidden" name="loaded_at" value="">
+            <label class="visually-hidden" aria-hidden="true">
+              Website
+              <input name="website" type="text" tabindex="-1" autocomplete="off">
+            </label>
             <label>
               Name
               <input name="name" type="text" autocomplete="name" required>
@@ -579,6 +596,9 @@
     const form = document.querySelector("#lead-form");
     const message = document.querySelector("#form-message");
     const downloadBox = document.querySelector("#download-box");
+    const loadedAt = document.querySelector("#loaded-at");
+
+    if (loadedAt) loadedAt.value = String(Date.now());
 
     form?.addEventListener("submit", async (event) => {
       event.preventDefault();
@@ -599,11 +619,12 @@
         const downloadLink = downloadBox.querySelector("a");
         if (payload.downloadUrl && downloadLink) downloadLink.href = payload.downloadUrl;
         form.reset();
+        if (loadedAt) loadedAt.value = String(Date.now());
         message.textContent = "Received. Your download is ready below.";
-      } catch (error) {
-        message.textContent = "Download unlocked. If the form delivery failed, email henry@curacel.ai.";
-      } finally {
         downloadBox.classList.add("is-visible");
+      } catch (error) {
+        message.textContent = "Submission did not go through. Email henry@curacel.ai and we will send the guide.";
+      } finally {
         submit.disabled = false;
         submit.textContent = original;
       }
