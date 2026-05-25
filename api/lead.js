@@ -2,9 +2,12 @@ const allowedOrigins = new Set([
   "https://openclaw-guide.com",
   "https://www.openclaw-guide.com",
   "https://pdf-landing-page-tau.vercel.app",
-  "http://127.0.0.1:4173",
-  "http://localhost:4173",
 ]);
+
+if (process.env.VERCEL_ENV !== "production") {
+  allowedOrigins.add("http://127.0.0.1:4173");
+  allowedOrigins.add("http://localhost:4173");
+}
 
 const recentSubmissions = new Map();
 const { createHash } = require("crypto");
@@ -17,6 +20,7 @@ function setCors(req, res) {
   }
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
+  res.setHeader("Access-Control-Max-Age", "600");
 }
 
 function getBody(req) {
