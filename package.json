@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "echo 'OpenClaw Lead Magnet - Static Site'",
-    "build": "echo 'Build complete'",
-    "start": "echo 'Server ready'"
+    "dev": "python3 -m http.server 4173",
+    "build": "node scripts/generate-pdf.mjs",
+    "start": "python3 -m http.server 4173"
   }
 }

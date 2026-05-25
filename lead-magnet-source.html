@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>5 Automated Workflows That Save 10 Hours/Week</title>
+  <style>
+    @page { size: Letter; margin: 0; }
+    :root {
+      --paper: #fffaf0;
+      --ink: #141414;
+      --muted: #5f5b52;
+      --line: #d9cfbb;
+      --dark: #181818;
+      --gold: #c8952d;
+      --blue: #2352b8;
+      --teal: #067a76;
+      --red: #b93535;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #ddd;
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.34;
+    }
+    .page {
+      width: 8.5in;
+      min-height: 11in;
+      padding: 0.58in;
+      background: var(--paper);
+      page-break-after: always;
+      position: relative;
+      overflow: hidden;
+    }
+    .page:last-child { page-break-after: auto; }
+    .cover {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      color: #fff;
+      background: var(--dark);
+    }
+    .cover:before {
+      content: "";
+      position: absolute;
+      inset: auto -1.1in -1.4in auto;
+      width: 4.9in;
+      height: 4.9in;
+      background: var(--gold);
+      border-radius: 50%;
+      opacity: 0.95;
+    }
+    .kicker {
+      color: var(--gold);
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+    .cover .kicker { color: #f3c96a; }
+    h1 {
+      margin: 0.4in 0 0;
+      max-width: 6.8in;
+      font-size: 62px;
+      line-height: 0.93;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 0 0 0.18in;
+      font-size: 34px;
+      line-height: 1.02;
+      letter-spacing: 0;
+    }
+    h3 {
+      margin: 0;
+      font-size: 24px;
+      line-height: 1.08;
+    }
+    p { margin: 0 0 0.16in; color: var(--muted); }
+    .cover p { max-width: 5.8in; color: rgba(255,255,255,0.76); font-size: 18px; }
+    .brand {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      font-weight: 900;
+    }
+    .mark {
+      display: grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      color: var(--dark);
+      background: #fff;
+      border-radius: 7px;
+    }
+    .cover-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      margin-top: 0.42in;
+      max-width: 6.9in;
+    }
+    .cover-tile {
+      min-height: 1.18in;
+      padding: 12px;
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.08);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      font-size: 12px;
+      font-weight: 850;
+    }
+    .summary {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 0.32in;
+      align-items: start;
+      margin-top: 0.22in;
+    }
+    .box {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #fff;
+      padding: 0.22in;
+    }
+    .box.dark {
+      background: var(--dark);
+      color: #fff;
+      border-color: var(--dark);
+    }
+    .box.dark p { color: rgba(255,255,255,0.72); }
+    .checklist {
+      display: grid;
+      gap: 9px;
+      margin-top: 0.12in;
+    }
+    .check {
+      display: grid;
+      grid-template-columns: 22px 1fr;
+      gap: 9px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .check:before {
+      content: "";
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--gold);
+      border-radius: 4px;
+      margin-top: 1px;
+    }
+    .workflow-head {
+      display: grid;
+      grid-template-columns: 0.65in 1fr auto;
+      gap: 14px;
+      align-items: center;
+      padding-bottom: 0.18in;
+      border-bottom: 2px solid var(--dark);
+      margin-bottom: 0.24in;
+    }
+    .num {
+      display: grid;
+      place-items: center;
+      width: 0.58in;
+      height: 0.58in;
+      color: #fff;
+      background: var(--dark);
+      border-radius: 9px;
+      font-size: 26px;
+      font-weight: 900;
+    }
+    .save {
+      color: #fff;
+      background: var(--teal);
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-size: 12px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr 2.05in;
+      gap: 0.28in;
+      align-items: start;
+    }
+    .steps {
+      display: grid;
+      gap: 10px;
+      margin: 0.18in 0;
+    }
+    .step {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 10px;
+      align-items: start;
+    }
+    .step b {
+      display: grid;
+      place-items: center;
+      width: 25px;
+      height: 25px;
+      color: #fff;
+      background: var(--blue);
+      border-radius: 6px;
+      font-size: 13px;
+    }
+    .step span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .mock {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #fff;
+      overflow: hidden;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.09);
+    }
+    .mockbar {
+      display: flex;
+      gap: 5px;
+      padding: 9px;
+      background: #eee6d8;
+      border-bottom: 1px solid var(--line);
+    }
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--red);
+    }
+    .dot:nth-child(2) { background: var(--gold); }
+    .dot:nth-child(3) { background: var(--teal); }
+    .mockbody { padding: 13px; }
+    .mockrow {
+      display: grid;
+      grid-template-columns: 24px 1fr;
+      gap: 8px;
+      padding: 9px 0;
+      border-bottom: 1px solid #ede5d8;
+      color: var(--muted);
+      font-size: 11px;
+    }
+    .mockrow:last-child { border-bottom: 0; }
+    .badge {
+      display: grid;
+      place-items: center;
+      width: 22px;
+      height: 22px;
+      color: #fff;
+      background: var(--gold);
+      border-radius: 5px;
+      font-weight: 900;
+      font-size: 10px;
+    }
+    .rule {
+      margin-top: 0.16in;
+      padding-top: 0.15in;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .footer {
+      position: absolute;
+      left: 0.58in;
+      right: 0.58in;
+      bottom: 0.34in;
+      display: flex;
+      justify-content: space-between;
+      color: #8a857a;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 800;
+    }
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.22in;
+      margin-top: 0.18in;
+    }
+    .cta {
+      margin-top: 0.26in;
+      padding: 0.22in;
+      background: var(--dark);
+      color: #fff;
+      border-radius: 10px;
+    }
+    .cta p { color: rgba(255,255,255,0.75); }
+  </style>
+</head>
+<body>
+  <section class="page cover">
+    <div>
+      <div class="brand"><span class="mark">OC</span><span>OpenClaw Operator Kit</span></div>
+      <h1>5 Automated Workflows That Save 10 Hours/Week</h1>
+      <p>Practical blueprints for replacing repeat founder and operator admin with channel-native agent workflows.</p>
+      <div class="cover-grid">
+        <div class="cover-tile"><span>01</span><span>Lead intake</span></div>
+        <div class="cover-tile"><span>02</span><span>Meeting actions</span></div>
+        <div class="cover-tile"><span>03</span><span>Inbox triage</span></div>
+        <div class="cover-tile"><span>04</span><span>Content loop</span></div>
+        <div class="cover-tile"><span>05</span><span>Ops report</span></div>
+      </div>
+    </div>
+    <div class="footer"><span>openclaw.com</span><span>10 hours/week target</span></div>
+  </section>
+
+  <section class="page">
+    <div class="kicker">Start here</div>
+    <h2>The goal is not automation theatre. The goal is fewer dropped balls.</h2>
+    <div class="summary">
+      <div>
+        <p>This guide gives you five workflows that remove repeat admin from the week without hiding decisions from humans. Each workflow has a trigger, agent action, destination, review point, setup checklist, and failure mode.</p>
+        <p>The examples assume an OpenClaw-style operator setup: a persistent assistant connected to channels, files, calendar, email, crons, and skills. You can adapt the same logic to Zapier, n8n, Make, Slack bots, or internal scripts.</p>
+        <div class="box dark">
+          <h3>What counts as a useful workflow?</h3>
+          <p>A useful workflow has a clear trigger, produces a concrete artifact, lands in the channel where work already happens, and makes failure visible.</p>
+        </div>
+      </div>
+      <div class="box">
+        <h3>Implementation checklist</h3>
+        <div class="checklist">
+          <div class="check">Pick one painful repeat task, not five.</div>
+          <div class="check">Define the input source and destination channel.</div>
+          <div class="check">Add a human review step for first runs.</div>
+          <div class="check">Log output and failures before scaling.</div>
+          <div class="check">Measure time saved after one week.</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer"><span>OpenClaw operator kit</span><span>02</span></div>
+  </section>
+
+  <section class="page">
+    <div class="workflow-head">
+      <div class="num">1</div>
+      <div><div class="kicker">Workflow one</div><h3>Lead intake to follow-up</h3></div>
+      <div class="save">Saves 2 hrs/week</div>
+    </div>
+    <div class="layout">
+      <div>
+        <p><strong>Trigger:</strong> A new lead arrives from a form, DM, email, or booking page.</p>
+        <p><strong>Agent action:</strong> The assistant enriches the lead, classifies urgency, drafts a response, creates a CRM row, and schedules the next follow-up.</p>
+        <div class="steps">
+          <div class="step"><b>1</b><span>Capture the lead with source, email, company, request, and urgency.</span></div>
+          <div class="step"><b>2</b><span>Ask the agent to classify the lead as now, nurture, or discard.</span></div>
+          <div class="step"><b>3</b><span>Send the draft response to Slack, Discord, or email drafts for review.</span></div>
+          <div class="step"><b>4</b><span>Create a follow-up task if the lead is not answered within 24 hours.</span></div>
+        </div>
+        <div class="rule"><strong>Failure mode:</strong> Do not let the agent send commitments without review. It can draft, route, and remind. Humans approve pricing, scope, and promises.</div>
+      </div>
+      <div class="mock">
+        <div class="mockbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        <div class="mockbody">
+          <div class="mockrow"><span class="badge">IN</span><span>New lead: wants OpenClaw setup</span></div>
+          <div class="mockrow"><span class="badge">AI</span><span>Classified as high intent</span></div>
+          <div class="mockrow"><span class="badge">CRM</span><span>Deal row created with source</span></div>
+          <div class="mockrow"><span class="badge">DM</span><span>Reply draft sent for review</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer"><span>OpenClaw operator kit</span><span>03</span></div>
+  </section>
+
+  <section class="page">
+    <div class="workflow-head">
+      <div class="num">2</div>
+      <div><div class="kicker">Workflow two</div><h3>Meeting notes to actions</h3></div>
+      <div class="save">Saves 2 hrs/week</div>
+    </div>
+    <div class="layout">
+      <div>
+        <p><strong>Trigger:</strong> A meeting transcript, recording, or call note lands after a meeting.</p>
+        <p><strong>Agent action:</strong> The assistant extracts decisions, open questions, owners, due dates, and follow-ups, then posts the brief to the right channel.</p>
+        <div class="steps">
+          <div class="step"><b>1</b><span>Fetch transcript from Fireflies, Zoom, Google Meet, or the shared notes folder.</span></div>
+          <div class="step"><b>2</b><span>Extract decisions, risks, action items, and customer language.</span></div>
+          <div class="step"><b>3</b><span>Create tasks with owners and due dates.</span></div>
+          <div class="step"><b>4</b><span>Send a concise recap to the team channel within 15 minutes.</span></div>
+        </div>
+        <div class="rule"><strong>Failure mode:</strong> Action items without owners become inspirational stationery. Require owner plus next action before creating a task.</div>
+      </div>
+      <div class="mock">
+        <div class="mockbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        <div class="mockbody">
+          <div class="mockrow"><span class="badge">TR</span><span>Transcript received</span></div>
+          <div class="mockrow"><span class="badge">DEC</span><span>3 decisions extracted</span></div>
+          <div class="mockrow"><span class="badge">ACT</span><span>5 tasks with owners</span></div>
+          <div class="mockrow"><span class="badge">POST</span><span>Recap posted to channel</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer"><span>OpenClaw operator kit</span><span>04</span></div>
+  </section>
+
+  <section class="page">
+    <div class="workflow-head">
+      <div class="num">3</div>
+      <div><div class="kicker">Workflow three</div><h3>Inbox and channel triage</h3></div>
+      <div class="save">Saves 2 hrs/week</div>
+    </div>
+    <div class="layout">
+      <div>
+        <p><strong>Trigger:</strong> Scheduled scans of Gmail, Slack, Discord, WhatsApp, or support inboxes.</p>
+        <p><strong>Agent action:</strong> The assistant identifies urgent threads, unanswered asks, reminders, investor/customer messages, and noisy low-value items.</p>
+        <div class="steps">
+          <div class="step"><b>1</b><span>Scan only trusted labels, channels, or threads. Scope matters.</span></div>
+          <div class="step"><b>2</b><span>Classify items as reply now, delegate, watch, archive, or ignore.</span></div>
+          <div class="step"><b>3</b><span>Generate a short digest with links and suggested responses.</span></div>
+          <div class="step"><b>4</b><span>Escalate deadlines and repeated follow-ups.</span></div>
+        </div>
+        <div class="rule"><strong>Failure mode:</strong> Never trust bot reminders without checking whether the human already replied in the thread.</div>
+      </div>
+      <div class="mock">
+        <div class="mockbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        <div class="mockbody">
+          <div class="mockrow"><span class="badge">P1</span><span>Customer renewal request</span></div>
+          <div class="mockrow"><span class="badge">P2</span><span>Investor follow-up</span></div>
+          <div class="mockrow"><span class="badge">DEL</span><span>Ops request routed</span></div>
+          <div class="mockrow"><span class="badge">LOW</span><span>Newsletter archived</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer"><span>OpenClaw operator kit</span><span>05</span></div>
+  </section>
+
+  <section class="page">
+    <div class="workflow-head">
+      <div class="num">4</div>
+      <div><div class="kicker">Workflow four</div><h3>Content repurposing loop</h3></div>
+      <div class="save">Saves 2 hrs/week</div>
+    </div>
+    <div class="layout">
+      <div>
+        <p><strong>Trigger:</strong> A long note, meeting transcript, blog draft, webinar, or founder rant lands in a content folder.</p>
+        <p><strong>Agent action:</strong> The assistant extracts the argument, creates a post pack, preserves voice, and prepares review-ready outputs.</p>
+        <div class="steps">
+          <div class="step"><b>1</b><span>Turn the source into a one-page argument map.</span></div>
+          <div class="step"><b>2</b><span>Create X, LinkedIn, newsletter, and short video prompts.</span></div>
+          <div class="step"><b>3</b><span>Run a humanizer pass to remove AI-shaped phrasing.</span></div>
+          <div class="step"><b>4</b><span>Queue drafts, not public posts, until reviewed.</span></div>
+        </div>
+        <div class="rule"><strong>Failure mode:</strong> Content automation fails when it flattens the founder voice. Preserve claims, receipts, and opinions.</div>
+      </div>
+      <div class="mock">
+        <div class="mockbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        <div class="mockbody">
+          <div class="mockrow"><span class="badge">SRC</span><span>Transcript imported</span></div>
+          <div class="mockrow"><span class="badge">MAP</span><span>Argument map created</span></div>
+          <div class="mockrow"><span class="badge">X</span><span>Thread draft ready</span></div>
+          <div class="mockrow"><span class="badge">LN</span><span>LinkedIn draft ready</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer"><span>OpenClaw operator kit</span><span>06</span></div>
+  </section>
+
+  <section class="page">
+    <div class="workflow-head">
+      <div class="num">5</div>
+      <div><div class="kicker">Workflow five</div><h3>Weekly ops report</h3></div>
+      <div class="save">Saves 2 hrs/week</div>
+    </div>
+    <div class="layout">
+      <div>
+        <p><strong>Trigger:</strong> A scheduled Friday scan of tasks, deals, metrics, incidents, commits, support items, and blockers.</p>
+        <p><strong>Agent action:</strong> The assistant produces a concise operating report: shipped, stuck, changed, risks, and next week focus.</p>
+        <div class="steps">
+          <div class="step"><b>1</b><span>Pull task board, CRM, calendar, support queue, and recent deployment notes.</span></div>
+          <div class="step"><b>2</b><span>Group updates by outcome, not by activity.</span></div>
+          <div class="step"><b>3</b><span>Flag blockers with exact owner and unblock requirement.</span></div>
+          <div class="step"><b>4</b><span>Deliver the report to leadership before planning.</span></div>
+        </div>
+        <div class="rule"><strong>Failure mode:</strong> A report that lists busywork is just prettier noise. Make the report decision-oriented.</div>
+      </div>
+      <div class="mock">
+        <div class="mockbar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        <div class="mockbody">
+          <div class="mockrow"><span class="badge">WIN</span><span>3 shipped outcomes</span></div>
+          <div class="mockrow"><span class="badge">RISK</span><span>2 risks need owners</span></div>
+          <div class="mockrow"><span class="badge">BLK</span><span>1 true blocker</span></div>
+          <div class="mockrow"><span class="badge">NEXT</span><span>Focus list drafted</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer"><span>OpenClaw operator kit</span><span>07</span></div>
+  </section>
+
+  <section class="page">
+    <div class="kicker">Rollout plan</div>
+    <h2>Install one workflow this week</h2>
+    <p>Start with the workflow that already wastes visible time. Do not automate everything at once. The first win should prove the pattern, expose edge cases, and build trust.</p>
+    <div class="two-col">
+      <div class="box">
+        <h3>Day 1</h3>
+        <p>Pick the workflow, define the trigger, and choose the destination channel.</p>
+      </div>
+      <div class="box">
+        <h3>Day 2</h3>
+        <p>Build the smallest version with manual review and logging enabled.</p>
+      </div>
+      <div class="box">
+        <h3>Day 3</h3>
+        <p>Run against real inputs, fix bad classifications, and document failures.</p>
+      </div>
+      <div class="box">
+        <h3>Day 4-5</h3>
+        <p>Schedule the workflow, measure time saved, and decide whether to expand.</p>
+      </div>
+    </div>
+    <div class="cta">
+      <h3>Want help implementing this?</h3>
+      <p>Use OpenClaw when you need a persistent assistant connected to channels, skills, cron jobs, memory, and operator workflows. Start at openclaw.com.</p>
+    </div>
+    <div class="footer"><span>OpenClaw operator kit</span><span>08</span></div>
+  </section>
+</body>
+</html>
